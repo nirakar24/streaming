@@ -1,0 +1,151 @@
+<!-- home.html -->
+
+<!DOCTYPE html>
+<html>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+<head>
+    <title>TV Series</title>
+    <style>
+        *{
+            background: #201f31;
+            font-family: 'poppins';
+        }
+
+        .left{
+            width: 100%;
+            height: 100%;
+            background: transparent;
+        }
+
+        .left img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 2vw;
+        }
+
+        .main{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .search{
+            display: flex;
+            justify-content: left;
+            align-items: left;
+            gap: 2vw;
+        }
+
+        .search textarea{
+            background-color: aliceblue;
+            font-size: 1.5vw;
+            border-radius: 1vw;
+        }
+
+        .search button{
+            color: black;
+            background-color: #ffbade;
+            width: 20%;
+            height: 100%;
+            padding: 0.5vw;
+            border: none;
+            border-radius: 1vw;
+        }
+
+        .right{
+            display: flex;
+            justify-content: center;
+            align-items: right;
+            flex-direction: column;
+            padding: 5vw;
+            gap: 2vw;
+        }
+
+        .hero_sect{
+            display: flex;
+            color: aliceblue;
+            margin-top: 6vw;
+            width: 80vw;
+            height: 20vw;
+            /* border: #ffffff solid 1px; */
+            /* padding: 2vw; */
+            border-radius: 2vw;
+            /* background-color: rgb(0, 119, 255); */
+        }
+
+        .overlay{
+            width: 100%;
+            height: 100%;
+            background-color: #201f31;
+        }
+
+        .poster_image{
+            width: 13vw;
+        }
+        .rotated-text {
+            writing-mode: vertical-lr; /* Rotate text by 90 degrees */
+            transform: rotate(180deg); /* Additional rotation to flip text orientation */
+            white-space: nowrap; /* Prevent text from wrapping */
+            margin: 5px 5px;
+        }
+
+        .series_container{
+            color: aliceblue;
+            display: flex;
+            /* flex-direction: column; */
+            justify-content: space-around;
+            font-size: 1vw;
+            margin-top: 1vw;
+            width: 80%;
+            margin-bottom: 50px;
+            /* gap: vw; */
+            /* background-color: #ffbade; */
+        }
+
+        .single{
+            display: flex;
+            margin: 0px 0px;
+        }
+
+        .text{
+            width: 70%;
+            margin-top: 3vw;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="hero_sect">
+            <div class="right">
+                <h1>Hianime</h1>
+                <div class="search">
+                    <textarea name="" id="" cols="30" rows="1"></textarea>
+                    <button>Search</button>
+                </div>
+                <p>Top search:Solo LevelingNinja KamuiOne PieceFrieren: Beyond Journey's EndJujutsu Kaisen 2nd SeasonMashle: Magic and Muscles Season 2Classroom of the Elite IIIRagna CrimsonThe Wrong Way to Use Healing MagicBlack Clover
+                </p>
+            </div>
+            <div class="left">
+                <img src="./../media/img/anw-min.webp" alt="">
+            </div>
+
+        </div>
+        <div class="text"><h2 style="color: #ffbade;">Trending</h2></div>
+        <div class="series_container"> 
+            {% for serie in series %}
+            <div class="single">
+            <h5 class="rotated-text">{{serie.title}}</h5>
+            <a href="{% url 'series_detail' serie.id %}">
+                <img src="{{ serie.poster.url }}" alt="{{ serie.title }}" class="poster_image">
+            </a>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ series.title }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #201f31; /* Set background color */
+        }
+        .container {
+            max-width: 800px;
+            /* margin: 0 auto; */
+            padding: 20px;
+            color: white; /* Set text color */
+        }
+        .series-title {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .episode {
+            display: inline-block; /* Display episodes in a row */
+            width: 43%; /* Each episode takes up 23% of the container width */
+            margin-right: 2%; /* Add some space between episodes */
+            margin-bottom: 20px;
+            vertical-align: top; /* Align episodes to the top of their container */
+            box-sizing: border-box; /* Include padding and border in the width calculation */
+            background-color: #3e3d50; /* Set episode background color */
+            padding: 10px; /* Add padding around each episode */
+            border-radius: 5px; /* Add border radius for rounded corners */
+        }
+        .episode-title {
+            font-size: 18px;
+            margin-bottom: 5px;
+            color: #fff; /* Set episode title color */
+        }
+        .video {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="series-title">{{ series.title }}</h1>
+        <h2>Episodes</h2>
+        <div class="episode-row">
+            {% for episode in episodes %}
+                <div class="episode">
+                    <h2 class="episode-title">{{ episode.title }}</h2>
+                    <video class="video" controls>
+                        <source src="{{ episode.video_url }}" type="video/mp4">
+                    </video>
+                    <!-- You can add more details about the episode here -->
+                </div>
+                {% if forloop.counter|divisibleby:4 and not forloop.last %}
+                    </div><div class="episode-row"> <!-- Close current row and start a new row -->
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
