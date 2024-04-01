@@ -10,6 +10,7 @@
             margin: 0;
             padding: 0;
             background-color: #201f31; /* Set background color */
+            overflow-x: hidden;
         }
         .container {
             max-width: 800px;
@@ -22,15 +23,15 @@
             margin-bottom: 10px;
         }
         .episode {
-            display: inline-block; /* Display episodes in a row */
-            width: 43%; /* Each episode takes up 23% of the container width */
-            margin-right: 2%; /* Add some space between episodes */
+            display: inline-block; 
+            width: 30%; 
+            margin-right: 2%; 
             margin-bottom: 20px;
-            vertical-align: top; /* Align episodes to the top of their container */
-            box-sizing: border-box; /* Include padding and border in the width calculation */
-            background-color: #3e3d50; /* Set episode background color */
-            padding: 10px; /* Add padding around each episode */
-            border-radius: 5px; /* Add border radius for rounded corners */
+            vertical-align: top; 
+            box-sizing: border-box; 
+            background-color: #3e3d50; 
+            padding: 10px; 
+            border-radius: 5px; 
         }
         .episode-title {
             font-size: 18px;
@@ -40,24 +41,76 @@
         .video {
             width: 100%;
         }
+        .episode-row{
+            display: flex;
+            margin-top: 1.5vw;
+            flex-wrap: wrap;
+            justify-content: left;
+            align-items: center;
+            gap: 1vw;
+            width: 90vw;
+        }
+
+        .hero {
+            position: relative;
+            display: flex;
+            justify-content: space-around;
+            padding: 3vw;
+            align-items: center;
+            width: 100%;
+            height: 400px; /* Set your desired height */
+            background-image: url('{{ series.posterbg.url}}');
+            background-size: cover;
+            background-position: center;
+            color: white; /* Text color */
+            /* filter: brightness(30%); */
+        }
+        h1{
+            font-size: 3vw;
+        }
+
+        /* .left {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 20px;
+        }
+
+        .right {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 20px;
+        } */
+
+        .right img {
+            max-width: 100%;
+            height: auto;
+        }
+
     </style>
 </head>
 <body>
+    <div class="hero">
+        <div class="left">
+          <h1>{{ series.title }}</h1>
+        </div>
+        <div class="right">
+          <img src="{{ series.poster.url }}" alt="Image">
+        </div>
+      </div>
     <div class="container">
-        <h1 class="series-title">{{ series.title }}</h1>
-        <h2>Episodes</h2>
         <div class="episode-row">
             {% for episode in episodes %}
                 <div class="episode">
                     <h2 class="episode-title">{{ episode.title }}</h2>
-                    <video class="video" controls>
+                    <video class="video" controls poster="{{ series.posterbg.url }}">
                         <source src="{{ episode.video_url }}" type="video/mp4">
+                        <!-- <img src="{{ series.posterbg.url }}" alt="Thumbnail" width="400"> -->
                     </video>
-                    <!-- You can add more details about the episode here -->
                 </div>
-                {% if forloop.counter|divisibleby:4 and not forloop.last %}
-                    </div><div class="episode-row"> <!-- Close current row and start a new row -->
-                {% endif %}
             {% endfor %}
         </div>
     </div>

@@ -8,6 +8,7 @@ from django.db import models
 class Series(models.Model):
     title = models.CharField(max_length=100)
     poster = models.ImageField(upload_to='posters/')
+    posterbg = models.ImageField(upload_to='posters_bg/')
     # Add any other fields you need for your Series model
 
     def __str__(self):
